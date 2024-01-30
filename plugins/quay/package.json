@@ -31,10 +31,10 @@
     "@backstage/core-plugin-api": "^1.7.0",
     "@backstage/plugin-catalog-react": "^1.8.5",
     "@backstage/theme": "^0.4.3",
+    "@janus-idp/shared-react": "2.5.0",
     "@material-ui/core": "^4.12.2",
     "@material-ui/icons": "^4.11.3",
     "@material-ui/lab": "4.0.0-alpha.61",
-    "@janus-idp/shared-react": "2.5.0",
     "react-use": "^17.4.0"
   },
   "peerDependencies": {
@@ -47,6 +47,7 @@
     "@backstage/dev-utils": "1.0.22",
     "@backstage/test-utils": "1.4.4",
     "@janus-idp/cli": "1.7.0",
+    "@playwright/test": "^1.41.0",
     "@testing-library/jest-dom": "5.17.0",
     "@testing-library/react": "12.1.5",
     "@testing-library/react-hooks": "8.0.1",
