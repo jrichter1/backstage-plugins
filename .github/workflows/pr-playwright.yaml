@@ -1,0 +1,19 @@
+name: Playwright tests
+
+on: pull_request
+
+jobs:
+  playwright:
+    name: 'Playwright Tests'
+    runs-on: ubuntu-latest
+    container:
+      image: mcr.microsoft.com/playwright:v1.41.1-jammy
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 18
+      - name: Install dependencies
+        run: yarn
+      - name: Run tests
+        run: bash .github/actions/playwright/test-launch.sh

@@ -22,7 +22,8 @@
     "prepack": "backstage-cli package prepack",
     "start": "backstage-cli package start",
     "test": "backstage-cli package test --passWithNoTests --coverage",
-    "tsc": "tsc"
+    "tsc": "tsc",
+    "ui-test": "yarn playwright test"
   },
   "dependencies": {
     "@aonic-ui/pipelines": "^1.0.1",
@@ -60,6 +61,7 @@
     "@backstage/dev-utils": "1.0.22",
     "@backstage/test-utils": "1.4.4",
     "@janus-idp/cli": "1.7.0",
+    "@playwright/test": "^1.41.0",
     "@testing-library/jest-dom": "5.17.0",
     "@testing-library/react": "12.1.5",
     "@testing-library/react-hooks": "8.0.1",

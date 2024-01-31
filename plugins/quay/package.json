@@ -23,7 +23,8 @@
     "prepare": "",
     "start": "backstage-cli package start",
     "test": "backstage-cli package test --passWithNoTests --coverage",
-    "tsc": "tsc"
+    "tsc": "tsc",
+    "ui-test": "yarn playwright test"
   },
   "dependencies": {
     "@backstage/catalog-model": "^1.4.3",
