@@ -1,4 +1,4 @@
-import { test, expect } from '@playwright/test';
+import { expect, test } from '@playwright/test';
 
 test('demo', async ({ page }) => {
   await page.goto('http://localhost:3000/quay');
@@ -8,4 +8,3 @@ test('demo', async ({ page }) => {
 
   await expect(page.getByText('CVE')).toHaveCount(5);
 });
-
