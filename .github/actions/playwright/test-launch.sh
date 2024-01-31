@@ -14,7 +14,8 @@ for attempt in $(seq 1 15); do
   fi
   if [[ attempt -eq 15 ]]; then
     echo "Failed to launch backend"
-    exit
+    cat $logfile
+    exit 1
   fi
 done
 
