@@ -32,7 +32,7 @@ for f in */; do
 
       for attempt in $(seq 1 45); do
         sleep 1
-        if grep -q "webpack compiled successfully" $tmpfile; then
+        if grep -q "webpack compiled" $tmpfile; then
           echo "$f started"
           break
         fi
