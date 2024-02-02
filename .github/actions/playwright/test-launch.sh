@@ -30,15 +30,16 @@ for f in */; do
       yarn start >$tmpfile 2>&1 &
       plugin=$!
 
-      for attempt in $(seq 1 15); do
+      for attempt in $(seq 1 45); do
         sleep 1
         if grep -q "webpack compiled successfully" $tmpfile; then
           echo "$f started"
           break
         fi
-        if [[ attempt -eq 15 ]]; then
+        if [[ attempt -eq 45 ]]; then
           echo "Failed to launch $f"
-          exit
+          cat $tmpfile
+          exit 1
         fi
       done
 
