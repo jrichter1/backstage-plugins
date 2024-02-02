@@ -20,3 +20,9 @@ jobs:
         run: yarn playwright install --with-deps chromium
       - name: Run tests
         run: bash .github/actions/playwright/test-launch.sh
+      - uses: actions/upload-artifact@v3
+        if: always()
+        with:
+          name: playwright-report
+          path: plugins/*/playwright-report/
+          retention-days: 1
