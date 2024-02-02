@@ -6,13 +6,13 @@ logfile=$(mktemp)
 yarn start >$logfile 2>&1 &
 backend=$!
 
-for attempt in $(seq 1 15); do
+for attempt in $(seq 1 45); do
   sleep 1
   if grep -q "Listening on" $logfile; then
     echo "Backend started"
     break
   fi
-  if [[ attempt -eq 15 ]]; then
+  if [[ attempt -eq 45 ]]; then
     echo "Failed to launch backend"
     cat $logfile
     exit 1
