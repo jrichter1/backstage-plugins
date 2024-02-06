@@ -13,7 +13,7 @@ const mockEntity: Entity = {
     name: 'backstage',
     description: 'backstage.io',
     annotations: {
-      'quay.io/repository-slug': 'hacdev/hac-tests',
+      'quay.io/repository-slug': 'backstage-test/test-images',
     },
   },
   spec: {
