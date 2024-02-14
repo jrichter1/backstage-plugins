@@ -52,6 +52,10 @@ jobs:
       - uses: actions/setup-node@v3
         with:
           node-version: 18
+      - name: Install dependencies
+        run: yarn
+      - name: Install playwright
+        run: yarn playwright install --with-deps chromium
       - name: Run tests
         env:
           PLUGINS: ${{ needs.changes.outputs.plugins }}
