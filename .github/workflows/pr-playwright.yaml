@@ -50,7 +50,7 @@ jobs:
           node-version: 18
       - name: Run tests
         env:
-          PLUGINS: ${{needs.changes.outputs.plugins}}
+          PLUGINS: ${{ needs.changes.outputs.plugins }}
         run: |
           root=$(pwd)
           cd packages/backend
