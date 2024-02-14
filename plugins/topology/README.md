@@ -6,7 +6,7 @@ The Topology plugin enables you to visualize the workloads such as Deployment, J
 
 ### Installation
 
-#### Prerequisites
+#### Prerequisitess
 
 - The Kubernetes plugins including `@backstage/plugin-kubernetes` and `@backstage/plugin-kubernetes-backend` are installed and configured by following the [installation](https://backstage.io/docs/features/kubernetes/installation) and [configuration](https://backstage.io/docs/features/kubernetes/configuration) guides.
 - The Kubernetes plugin is configured and connects to the cluster using a `ServiceAccount`.
