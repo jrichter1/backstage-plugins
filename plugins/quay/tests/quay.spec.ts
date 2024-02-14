@@ -22,7 +22,7 @@ test.describe('Quay plugin', () => {
       'Last Modified',
       'Security Scan',
       'Size',
-      'Expires',
+      'Expiress',
       'Manifest',
     ];
     const thead = page.locator('thead');
