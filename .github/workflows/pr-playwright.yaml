@@ -8,6 +8,8 @@ jobs:
   changes:
     name: Scan for chages
     runs-on: ubuntu-latest
+    outputs:
+      plugins: ${{ steps.scan.outputs.plugins }}
     steps:
       - uses: actions/checkout@v4
         with:
@@ -16,6 +18,7 @@ jobs:
         with:
           node-version: 18
       - name: Determine changes
+        id: scan
         env:
           HEAD: ${{ github.event.pull_request.head.sha }}
           BASE: ${{ github.event.pull_request.base.sha }}
