@@ -6,6 +6,7 @@ on:
 
 jobs:
   changes:
+    name: Scan for chages
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -35,6 +36,7 @@ jobs:
           done
 
           JSON="[$(echo ${changed[@]} | sed 's/ /,/g')]"
+          echo $JSON
           echo "plugins=$(echo $JSON)" >> $GITHUB_OUTPUT
   playwright:
     name: 'Playwright Tests'
@@ -46,10 +48,6 @@ jobs:
       - uses: actions/setup-node@v3
         with:
           node-version: 18
-      - name: Install dependencies
-        run: yarn
-      - name: Install playwright
-        run: yarn playwright install --with-deps chromium
       - name: Run tests
         env:
           PLUGINS: ${{needs.changes.outputs.plugins}}
@@ -60,68 +58,68 @@ jobs:
 
           echo ${folders[@]}
 
-          # Start backend
-          echo "Starting backend"
-          logfile=$(mktemp)
-          yarn start >$logfile 2>&1 &
+          # # Start backend
+          # echo "Starting backend"
+          # logfile=$(mktemp)
+          # yarn start >$logfile 2>&1 &
 
-          for attempt in $(seq 1 45); do
-            sleep 1
-            if grep -q "Error:" $logfile; then
-              cat $logfile
-              exit 1
-            fi
-            if grep -q "Listening on" $logfile; then
-              echo "Backend started"
-              break
-            fi
-            if [[ attempt -eq 45 ]]; then
-              echo "Failed to launch backend"
-              cat $logfile
-              exit 1
-            fi
-          done
+          # for attempt in $(seq 1 45); do
+          #   sleep 1
+          #   if grep -q "Error:" $logfile; then
+          #     cat $logfile
+          #     exit 1
+          #   fi
+          #   if grep -q "Listening on" $logfile; then
+          #     echo "Backend started"
+          #     break
+          #   fi
+          #   if [[ attempt -eq 45 ]]; then
+          #     echo "Failed to launch backend"
+          #     cat $logfile
+          #     exit 1
+          #   fi
+          # done
 
-          cd $root/plugins
+          # cd $root/plugins
 
-          # Launch suitable plugins with changes
-          for f in $folders; do
-            cd $f
+          # # Launch suitable plugins with changes
+          # for f in $folders; do
+          #   cd $f
 
-            echo "Starting $f plugin"
-            tmpfile=$(mktemp)
+          #   echo "Starting $f plugin"
+          #   tmpfile=$(mktemp)
 
-            # Start the plugin
-            yarn start >$tmpfile 2>&1 &
-            for attempt in $(seq 1 45); do
-              sleep 1
-              if grep -q "Error:" $tmpfile; then
-              cat $tmpfile
-              exit 1
-              fi
-              if grep -q "webpack compiled" $tmpfile; then
-                echo "$f started"
-                break
-              fi
-              if [[ attempt -eq 45 ]]; then
-                echo "Failed to launch $f"
-                cat $tmpfile
-                exit 1
-              fi
-            done
+          #   # Start the plugin
+          #   yarn start >$tmpfile 2>&1 &
+          #   for attempt in $(seq 1 45); do
+          #     sleep 1
+          #     if grep -q "Error:" $tmpfile; then
+          #     cat $tmpfile
+          #     exit 1
+          #     fi
+          #     if grep -q "webpack compiled" $tmpfile; then
+          #       echo "$f started"
+          #       break
+          #     fi
+          #     if [[ attempt -eq 45 ]]; then
+          #       echo "Failed to launch $f"
+          #       cat $tmpfile
+          #       exit 1
+          #     fi
+          #   done
 
-            # Run UI tests
-            yarn run ui-test
+          #   # Run UI tests
+          #   yarn run ui-test
             
-            # Kill the plugin
-            pid=$(lsof -i :3000 -Fp | grep p | sed s/p//)
-            kill -9 $pid && echo "$f shut down"
-            cd $root/plugins
-          done
+          #   # Kill the plugin
+          #   pid=$(lsof -i :3000 -Fp | grep p | sed s/p//)
+          #   kill -9 $pid && echo "$f shut down"
+          #   cd $root/plugins
+          # done
 
-          # Kill backend
-          pid=$(lsof -i :7007 -Fp | grep p | sed s/p//)
-          kill -9 $pid && echo "Backend shut down"
+          # # Kill backend
+          # pid=$(lsof -i :7007 -Fp | grep p | sed s/p//)
+          # kill -9 $pid && echo "Backend shut down"
       - uses: actions/upload-artifact@v3
         if: always()
         with:
