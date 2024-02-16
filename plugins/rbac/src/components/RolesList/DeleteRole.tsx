@@ -29,6 +29,7 @@ const DeleteRole = ({
     <Tooltip title={tooltip || ''}>
       <span data-testid={dataTestId}>
         <IconButton
+          aria-labelledby={dataTestId}
           color="inherit"
           onClick={() => openDialog(roleName)}
           aria-label="Delete"

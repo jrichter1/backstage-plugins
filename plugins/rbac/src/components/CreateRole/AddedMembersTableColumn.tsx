@@ -80,8 +80,8 @@ export const selectedMembersColumns = (
         return (
           <span key={mem.etag}>
             <IconButton
+              aria-label={`${mem.label}-remove`}
               onClick={() => onRemove(mem.etag)}
-              aria-label="Remove"
               title="Remove member"
             >
               <Delete />

@@ -29,7 +29,7 @@ const EditRole = ({
         <IconButton
           color="inherit"
           component={Link}
-          aria-label="Update"
+          aria-label={dataTestId}
           disabled={disable}
           title={tooltip || 'Edit Role'}
           to={to || `../role/${kind}/${namespace}/${name}`}

@@ -35,6 +35,7 @@ export const MembersDropdownOption = ({
     <Box key={`${etag}`}>
       {parts.map(part => (
         <span
+          aria-label={option.label}
           key={`${part.text}-${etag}`}
           className={classes.optionLabel}
           style={{

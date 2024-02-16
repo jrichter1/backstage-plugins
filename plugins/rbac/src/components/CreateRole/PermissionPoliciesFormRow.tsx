@@ -119,6 +119,7 @@ export const PermissionPoliciesFormRow = ({
         rowName={rowName}
       />
       <IconButton
+        aria-label={`${rowName}-remove`}
         title="Remove"
         className={classes.removeButton}
         onClick={() => onRemove()}
