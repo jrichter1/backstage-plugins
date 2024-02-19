@@ -17,13 +17,16 @@ jobs:
       - uses: actions/setup-node@v3
         with:
           node-version: 18
+      - name: env dump
+        env:
+          GITHUB_CONTEXT: ${{ toJson(github) }}
+        run: echo "$GITHUB_CONTEXT"
       - name: Determine changes
         id: scan
         env:
           HEAD: ${{ github.event.pull_request.head.sha }}
           BASE: ${{ github.event.pull_request.base.sha }}
         run: |
-          echo "$GITHUB_CONTEXT"
           root=$(pwd)
           cd plugins
 
@@ -44,3 +47,4 @@ jobs:
           JSON="[$(echo ${changed[@]} | sed 's/ /,/g')]"
           echo "plugins=$(echo $JSON)" >> $GITHUB_OUTPUT
           echo $JSON
+          git diff --name-only $BASE $HEAD
