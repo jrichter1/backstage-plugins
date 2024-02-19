@@ -21,7 +21,7 @@ jobs:
         id: scan
         env:
           COMMITS: ${{ github.event.pull_request.commits }}
-          HEAD: ${{ github.event.pull_request.head.sha }}
+          HEAD: ${{ github.sha }}
           BASE: ${{ github.event.pull_request.base.sha }}
         run: |
           root=$(pwd)
@@ -49,3 +49,5 @@ jobs:
 
           echo "----------------------------"
           git diff --name-only HEAD~$COMMITS $HEAD
+          echo "----------------------------"
+          git diff --name-only --diff-filter=ACMRT $BASE $HEAD
